@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UA Generator - Samsung Mobile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #1A1A1A;
+            --accent-color: #E0E0E0;
+            --secondary-color: #262626;
+            --text-primary: #EDEDED;
+            --text-secondary: #909090;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background: var(--secondary-color);
+            padding: 2.5rem 3rem;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(224, 224, 224, 0.1);
+            max-width: 90%;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            color: var(--accent-color);
+            letter-spacing: 0.5px;
+            font-weight: 500;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .android-icon {
+            font-size: 3.2em;
+            margin-bottom: 25px;
+            color: var(--accent-color);
+            opacity: 0.9;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        button {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            border: 1px solid rgba(224, 224, 224, 0.3);
+            border-radius: 6px;
+            padding: 14px 32px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        button:hover {
+            background: #C0C0C0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(224, 224, 224, 0.1);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #user_agent {
+            background-color: rgba(40, 40, 40, 0.6);
+            border-radius: 6px;
+            margin: 25px auto 0;
+            padding: 15px 20px;
+            font-size: 0.95em;
+            font-family: 'Roboto Mono', monospace;
+            max-width: 90%;
+            word-break: break-word;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(224, 224, 224, 0.2);
+            color: var(--text-primary);
+        }
+
+        #user_agent.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .copy-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-color);
+            color: var(--bg-color);
+            padding: 8px 20px;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            font-size: 0.9em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            font-weight: 500;
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 1.8rem;
+                border-radius: 8px;
+            }
+            
+            h1 {
+                font-size: 1.4em;
+            }
+            
+            button {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <i class="fab fa-android android-icon"></i>
+        <h1>UA Generator (Samsung Mobile)</h1>
+        <button id="generar">Generate UA</button>
+        <div id="user_agent"></div>
+        <div class="copy-notification">Copied to clipboard</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateButton = document.getElementById('generar');
+            const userAgentDiv = document.getElementById('user_agent');
+            const copyNotification = document.querySelector('.copy-notification');
+
+            const userAgents = [
+                // Serie Galaxy S
+                "Mozilla/5.0 (Android 14; Mobile; SM-S928B) Gecko/126.0 Firefox/126.0 DevEd",
+                "Mozilla/5.0 (Android 13; Mobile; SM-S918B) Gecko/115.0 Firefox/115.0 DevEd",
+                "Mozilla/5.0 (Android 12; Mobile; SM-S901B) Gecko/102.0 Firefox/102.0 DevEd",
+                "Mozilla/5.0 (Android 11; Mobile; SM-G991B) Gecko/90.0 Firefox/90.0 DevEd",
+                
+                // Serie Galaxy Z Fold
+                "Mozilla/5.0 (Android 14; Mobile; SM-F956B) Gecko/126.0 Firefox/126.0 DevEd",
+                "Mozilla/5.0 (Android 13; Mobile; SM-F936B) Gecko/115.0 Firefox/115.0 DevEd",
+                "Mozilla/5.0 (Android 12; Mobile; SM-F926B) Gecko/102.0 Firefox/102.0 DevEd",
+                
+                // Serie Galaxy Z Flip
+                "Mozilla/5.0 (Android 14; Mobile; SM-F741B) Gecko/126.0 Firefox/126.0 DevEd",
+                "Mozilla/5.0 (Android 13; Mobile; SM-F731B) Gecko/115.0 Firefox/115.0 DevEd",
+                "Mozilla/5.0 (Android 12; Mobile; SM-F711B) Gecko/102.0 Firefox/102.0 DevEd",
+                
+                // Serie Galaxy A
+                "Mozilla/5.0 (Android 14; Mobile; SM-A546B) Gecko/126.0 Firefox/126.0 DevEd",
+                "Mozilla/5.0 (Android 13; Mobile; SM-A536B) Gecko/115.0 Firefox/115.0 DevEd",
+                "Mozilla/5.0 (Android 12; Mobile; SM-A525F) Gecko/102.0 Firefox/102.0 DevEd",
+                "Mozilla/5.0 (Android 11; Mobile; SM-A515F) Gecko/90.0 Firefox/90.0 DevEd",
+                
+                // Serie Galaxy M
+                "Mozilla/5.0 (Android 14; Mobile; SM-M546B) Gecko/126.0 Firefox/126.0 DevEd",
+                "Mozilla/5.0 (Android 13; Mobile; SM-M536B) Gecko/115.0 Firefox/115.0 DevEd",
+                "Mozilla/5.0 (Android 12; Mobile; SM-M325FV) Gecko/102.0 Firefox/102.0 DevEd",
+                
+                // Serie Galaxy Note
+                "Mozilla/5.0 (Android 12; Mobile; SM-N986B) Gecko/102.0 Firefox/102.0 DevEd",
+                "Mozilla/5.0 (Android 11; Mobile; SM-N976B) Gecko/90.0 Firefox/90.0 DevEd",
+                "Mozilla/5.0 (Android 10; Mobile; SM-N975F) Gecko/80.0 Firefox/80.0 DevEd",
+                
+                // Dispositivos antiguos
+                "Mozilla/5.0 (Android 9; Mobile; SM-G973F) Gecko/70.0 Firefox/70.0 DevEd",
+                "Mozilla/5.0 (Android 8; Mobile; SM-G950F) Gecko/60.0 Firefox/60.0 DevEd",
+                "Mozilla/5.0 (Android 7; Mobile; SM-G930F) Gecko/50.0 Firefox/50.0 DevEd",
+                
+                // Tablets Galaxy Tab
+                "Mozilla/5.0 (Android 14; Tablet; SM-X810) Gecko/126.0 Firefox/126.0 DevEd",
+                "Mozilla/5.0 (Android 13; Tablet; SM-X716B) Gecko/115.0 Firefox/115.0 DevEd",
+                "Mozilla/5.0 (Android 12; Tablet; SM-T735) Gecko/102.0 Firefox/102.0 DevEd",
+                
+                // Modelos 5G
+                "Mozilla/5.0 (Android 14; Mobile; SM-S911B) Gecko/126.0 Firefox/126.0 DevEd",
+                "Mozilla/5.0 (Android 13; Mobile; SM-A336B) Gecko/115.0 Firefox/115.0 DevEd",
+                "Mozilla/5.0 (Android 12; Mobile; SM-M526BR) Gecko/102.0 Firefox/102.0 DevEd",
+                
+                // Ediciones especiales
+                "Mozilla/5.0 (Android 14; Mobile; SM-G998B) Gecko/126.0 Firefox/126.0 DevEd", // S21 Ultra
+                "Mozilla/5.0 (Android 13; Mobile; SM-F707B) Gecko/115.0 Firefox/115.0 DevEd", // Z Flip 5G
+                "Mozilla/5.0 (Android 12; Mobile; SM-N770F) Gecko/102.0 Firefox/102.0 DevEd"  // Note 10 Lite
+            ];
+
+            function getRandomUserAgent() {
+                return userAgents[Math.floor(Math.random() * userAgents.length)];
+            }
+
+            generateButton.addEventListener('click', function() {
+                const userAgent = getRandomUserAgent();
+                userAgentDiv.textContent = userAgent;
+                userAgentDiv.classList.add('visible');
+
+                navigator.clipboard.writeText(userAgent)
+                    .then(() => {
+                        copyNotification.classList.add('show');
+                        setTimeout(() => copyNotification.classList.remove('show'), 1500);
+                    })
+                    .catch(err => console.error("Error al copiar: ", err));
+            });
+        });
+    </script>
+
+</body>
+</html>
