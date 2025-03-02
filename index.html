@@ -155,57 +155,19 @@
             const copyNotification = document.querySelector('.copy-notification');
 
             const userAgents = [
-                // Serie Galaxy S
-                "Mozilla/5.0 (Android 14; Mobile; SM-S928B) Gecko/126.0 Firefox/126.0 DevEd",
-                "Mozilla/5.0 (Android 13; Mobile; SM-S918B) Gecko/115.0 Firefox/115.0 DevEd",
-                "Mozilla/5.0 (Android 12; Mobile; SM-S901B) Gecko/102.0 Firefox/102.0 DevEd",
-                "Mozilla/5.0 (Android 11; Mobile; SM-G991B) Gecko/90.0 Firefox/90.0 DevEd",
-                
-                // Serie Galaxy Z Fold
-                "Mozilla/5.0 (Android 14; Mobile; SM-F956B) Gecko/126.0 Firefox/126.0 DevEd",
-                "Mozilla/5.0 (Android 13; Mobile; SM-F936B) Gecko/115.0 Firefox/115.0 DevEd",
-                "Mozilla/5.0 (Android 12; Mobile; SM-F926B) Gecko/102.0 Firefox/102.0 DevEd",
-                
-                // Serie Galaxy Z Flip
-                "Mozilla/5.0 (Android 14; Mobile; SM-F741B) Gecko/126.0 Firefox/126.0 DevEd",
-                "Mozilla/5.0 (Android 13; Mobile; SM-F731B) Gecko/115.0 Firefox/115.0 DevEd",
-                "Mozilla/5.0 (Android 12; Mobile; SM-F711B) Gecko/102.0 Firefox/102.0 DevEd",
-                
-                // Serie Galaxy A
-                "Mozilla/5.0 (Android 14; Mobile; SM-A546B) Gecko/126.0 Firefox/126.0 DevEd",
-                "Mozilla/5.0 (Android 13; Mobile; SM-A536B) Gecko/115.0 Firefox/115.0 DevEd",
-                "Mozilla/5.0 (Android 12; Mobile; SM-A525F) Gecko/102.0 Firefox/102.0 DevEd",
-                "Mozilla/5.0 (Android 11; Mobile; SM-A515F) Gecko/90.0 Firefox/90.0 DevEd",
-                
-                // Serie Galaxy M
-                "Mozilla/5.0 (Android 14; Mobile; SM-M546B) Gecko/126.0 Firefox/126.0 DevEd",
-                "Mozilla/5.0 (Android 13; Mobile; SM-M536B) Gecko/115.0 Firefox/115.0 DevEd",
-                "Mozilla/5.0 (Android 12; Mobile; SM-M325FV) Gecko/102.0 Firefox/102.0 DevEd",
-                
-                // Serie Galaxy Note
-                "Mozilla/5.0 (Android 12; Mobile; SM-N986B) Gecko/102.0 Firefox/102.0 DevEd",
-                "Mozilla/5.0 (Android 11; Mobile; SM-N976B) Gecko/90.0 Firefox/90.0 DevEd",
-                "Mozilla/5.0 (Android 10; Mobile; SM-N975F) Gecko/80.0 Firefox/80.0 DevEd",
-                
-                // Dispositivos antiguos
-                "Mozilla/5.0 (Android 9; Mobile; SM-G973F) Gecko/70.0 Firefox/70.0 DevEd",
-                "Mozilla/5.0 (Android 8; Mobile; SM-G950F) Gecko/60.0 Firefox/60.0 DevEd",
-                "Mozilla/5.0 (Android 7; Mobile; SM-G930F) Gecko/50.0 Firefox/50.0 DevEd",
-                
-                // Tablets Galaxy Tab
-                "Mozilla/5.0 (Android 14; Tablet; SM-X810) Gecko/126.0 Firefox/126.0 DevEd",
-                "Mozilla/5.0 (Android 13; Tablet; SM-X716B) Gecko/115.0 Firefox/115.0 DevEd",
-                "Mozilla/5.0 (Android 12; Tablet; SM-T735) Gecko/102.0 Firefox/102.0 DevEd",
-                
-                // Modelos 5G
-                "Mozilla/5.0 (Android 14; Mobile; SM-S911B) Gecko/126.0 Firefox/126.0 DevEd",
-                "Mozilla/5.0 (Android 13; Mobile; SM-A336B) Gecko/115.0 Firefox/115.0 DevEd",
-                "Mozilla/5.0 (Android 12; Mobile; SM-M526BR) Gecko/102.0 Firefox/102.0 DevEd",
-                
-                // Ediciones especiales
-                "Mozilla/5.0 (Android 14; Mobile; SM-G998B) Gecko/126.0 Firefox/126.0 DevEd", // S21 Ultra
-                "Mozilla/5.0 (Android 13; Mobile; SM-F707B) Gecko/115.0 Firefox/115.0 DevEd", // Z Flip 5G
-                "Mozilla/5.0 (Android 12; Mobile; SM-N770F) Gecko/102.0 Firefox/102.0 DevEd"  // Note 10 Lite
+                // User-Agents Genéricos de Chrome en Android (más compatibles)
+                "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36",
+                "Mozilla/5.0 (Linux; Android 13; SM-G991B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36",
+                "Mozilla/5.0 (Linux; Android 12; SM-A525F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36",
+                "Mozilla/5.0 (Linux; Android 11; SM-G973F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36",
+
+                // User-Agents de WebView (útil si estás usando un WebView en tu aplicación)
+                "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36 WebView",
+                "Mozilla/5.0 (Linux; Android 13; SM-G991B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36 WebView",
+
+                // Aún más genéricos (si los anteriores siguen fallando)
+                "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36",
+                "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36",
             ];
 
             function getRandomUserAgent() {
